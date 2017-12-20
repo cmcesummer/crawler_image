@@ -1,0 +1,127 @@
+[
+    {
+        "req": {
+            "method": "GET",
+            "url": "http://content.battlenet.com.cn/wow/media/wallpapers/patch/fall-of-the-lich-king/fall-of-the-lich-king-1920x1080.jpg",
+            "headers": {
+                "user-agent": "node-superagent/3.8.2"
+            }
+        },
+        "header": {
+            "expires": "Tue, 26 Dec 2017 09:29:56 GMT",
+            "date": "Tue, 19 Dec 2017 09:29:56 GMT",
+            "server": "Apache",
+            "x-frame-options": "SAMEORIGIN",
+            "last-modified": "Thu, 27 Jul 2017 18:35:10 GMT",
+            "accept-ranges": "bytes",
+            "content-length": "777350",
+            "cache-control": "max-age=604800",
+            "content-type": "image/jpeg",
+            "age": "97098",
+            "x-via": "1.1 xxzhwt40:7 (Cdn Cache Server V2.0)[96 200 2], 1.1 k110:7 (Cdn Cache Server V2.0)[0 200 0]",
+            "x-ws-request-id": "5a3a575e_k110_19449-49314",
+            "connection": "close"
+        },
+        "status": 200
+    },
+    {
+        "req": {
+            "method": "GET",
+            "url": "http://content.battlenet.com.cn/wow/media/wallpapers/patch/black-temple/black-temple-1920x1200.jpg",
+            "headers": {
+                "user-agent": "node-superagent/3.8.2"
+            }
+        },
+        "header": {
+            "expires": "Tue, 26 Dec 2017 12:04:27 GMT",
+            "date": "Tue, 19 Dec 2017 12:04:27 GMT",
+            "server": "Apache",
+            "x-frame-options": "SAMEORIGIN",
+            "last-modified": "Thu, 31 Jan 2013 17:47:51 GMT",
+            "accept-ranges": "bytes",
+            "content-length": "1462713",
+            "cache-control": "max-age=604800",
+            "content-type": "image/jpeg",
+            "age": "87827",
+            "x-via": "1.1 gdd81:7 (Cdn Cache Server V2.0)[95 200 2], 1.1 k110:1 (Cdn Cache Server V2.0)[0 200 0]",
+            "x-ws-request-id": "5a3a575e_k110_19451-46581",
+            "connection": "close"
+        },
+        "status": 200
+    },
+    {
+        "req": {
+            "method": "GET",
+            "url": "http://content.battlenet.com.cn/wow/media/wallpapers/patch/zandalari/zandalari-1920x1200.jpg",
+            "headers": {
+                "user-agent": "node-superagent/3.8.2"
+            }
+        },
+        "header": {
+            "expires": "Tue, 26 Dec 2017 12:04:27 GMT",
+            "date": "Tue, 19 Dec 2017 12:04:27 GMT",
+            "server": "Apache",
+            "x-frame-options": "SAMEORIGIN",
+            "last-modified": "Thu, 27 Jul 2017 18:35:20 GMT",
+            "accept-ranges": "bytes",
+            "content-length": "996356",
+            "cache-control": "max-age=604800",
+            "content-type": "image/jpeg",
+            "age": "87827",
+            "x-via": "1.1 xxzhwt40:9 (Cdn Cache Server V2.0)[93 200 2], 1.1 k110:7 (Cdn Cache Server V2.0)[0 200 0]",
+            "x-ws-request-id": "5a3a575e_k110_19451-46583",
+            "connection": "close"
+        },
+        "status": 200
+    },
+    {
+        "req": {
+            "method": "GET",
+            "url": "http://content.battlenet.com.cn/wow/media/wallpapers/patch/rage-of-the-firelands/rage-of-the-firelands-1920x1200.jpg",
+            "headers": {
+                "user-agent": "node-superagent/3.8.2"
+            }
+        },
+        "header": {
+            "expires": "Tue, 26 Dec 2017 12:04:27 GMT",
+            "date": "Tue, 19 Dec 2017 12:04:27 GMT",
+            "server": "Apache",
+            "x-frame-options": "SAMEORIGIN",
+            "last-modified": "Thu, 27 Jul 2017 18:35:18 GMT",
+            "accept-ranges": "bytes",
+            "content-length": "2108134",
+            "cache-control": "max-age=604800",
+            "content-type": "image/jpeg",
+            "age": "87827",
+            "x-via": "1.1 xzhwt46:6 (Cdn Cache Server V2.0)[71 200 2], 1.1 k110:2 (Cdn Cache Server V2.0)[0 200 0]",
+            "x-ws-request-id": "5a3a575e_k110_19449-49315",
+            "connection": "close"
+        },
+        "status": 200
+    },
+    {
+        "req": {
+            "method": "GET",
+            "url": "http://content.battlenet.com.cn/wow/media/wallpapers/patch/fury-of-hellfire/fury-of-hellfire-3840x2160.jpg",
+            "headers": {
+                "user-agent": "node-superagent/3.8.2"
+            }
+        },
+        "header": {
+            "expires": "Tue, 26 Dec 2017 12:04:27 GMT",
+            "date": "Tue, 19 Dec 2017 12:04:27 GMT",
+            "server": "Apache",
+            "x-frame-options": "SAMEORIGIN",
+            "last-modified": "Thu, 27 Jul 2017 18:35:13 GMT",
+            "accept-ranges": "bytes",
+            "content-length": "2022274",
+            "cache-control": "max-age=604800",
+            "content-type": "image/jpeg",
+            "age": "87827",
+            "x-via": "1.1 kuan169:7 (Cdn Cache Server V2.0)[144 200 2], 1.1 k110:3 (Cdn Cache Server V2.0)[0 200 0]",
+            "x-ws-request-id": "5a3a575e_k110_19435-51752",
+            "connection": "close"
+        },
+        "status": 200
+    }
+]
