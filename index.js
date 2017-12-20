@@ -15,7 +15,7 @@ const urlList = [
     "http://content.battlenet.com.cn/wow/media/wallpapers/patch/fury-of-hellfire/fury-of-hellfire-3840x2160.jpg",
 ];
 
-const cookie = ''//your cookie
+const cookie = ''
 let total_page = 1;
 
 const get_page_url = (num) => {
@@ -49,28 +49,41 @@ const get_item_url_arr = (page_arr) => {
     })
 }
 
-$http.get('https://tieba.baidu.com/p/comment?tid=5171602458&pid=108295392615&pn=1&t=1513685817724&red_tag=1472410715')
-    .set('cookie', cookie)
-    .set('Host', 'tieba.baidu.com')
-    .set('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36')
-    .then(res => {
-        if(res.status != 200) throw res.status
-        let a_arr = [];
+// $http.get('https://tieba.baidu.com/p/comment?tid=5171602458&pid=108295392615&pn=1&t=1513685817724&red_tag=1472410715')
+//     .set('cookie', cookie)
+//     .set('Host', 'tieba.baidu.com')
+//     .set('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36')
+//     .then(res => {
+//         if(res.status != 200) throw res.status
+//         let a_arr = [];
  
-        const $ = cheerio.load(res.text);
+//         const $ = cheerio.load(res.text);
         
-        total_page = Number($('.pager_theme_2').children().last().attr('href').substring(1))
+//         total_page = Number($('.pager_theme_2').children().last().attr('href').substring(1))
 
-        const page_url_arr = get_page_url(total_page);
+//         const page_url_arr = get_page_url(total_page);
 
-        get_item_url_arr(page_url_arr);
+//         get_item_url_arr(page_url_arr);
 
-    }).catch(err => {
-        console.log(err)
+//     }).catch(err => {
+//         console.log(err)
+//     })
+
+
+$http.get('https://tieba.baidu.com/p/5430286064')
+    .set('Host', 'tieba.baidu.com')
+    .set('User-Agent', 'Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Mobile Safari/537.36')
+    .then(res => {
+        const $ = cheerio.load(res.text);
+        let img_arr = [];
+        $('.j_media_thumb_holder.img_placeholder').each(function() {
+            img_arr.push($(this).attr('data-url'));
+        })
+        fs.writeFile(path.join(__dirname, './res_file/BDE_Image.json'), JSON.stringify(img_arr), 'utf-8', err => {
+            if (err) throw err;
+            console.log('write baidu over')
+        })
     })
-
-
-
 
 
 
