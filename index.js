@@ -79,10 +79,11 @@ $http.get('https://tieba.baidu.com/p/5430286064')
         $('.j_media_thumb_holder.img_placeholder').each(function() {
             img_arr.push($(this).attr('data-url'));
         })
-        fs.writeFile(path.join(__dirname, './res_file/BDE_Image.json'), JSON.stringify(img_arr), 'utf-8', err => {
-            if (err) throw err;
-            console.log('write baidu over')
-        })
+        console.log($('title').text())
+        // fs.writeFile(path.join(__dirname, './res_file/BDE_Image.json'), JSON.stringify(img_arr), 'utf-8', err => {
+        //     if (err) throw err;
+        //     console.log('write baidu over')
+        // })
     })
 
 
