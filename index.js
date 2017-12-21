@@ -1,11 +1,10 @@
-
-var http = require('http');
-var fs = require('fs');
-var path = require('path');
-var request = require("request");
-var $http = require('superagent');
-var cheerio = require('cheerio');
-var async = require('async');
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
+const request = require("request");
+const $http = require('superagent');
+const cheerio = require('cheerio');
+const async = require('async');
 
 const urlList = [
     "http://content.battlenet.com.cn/wow/media/wallpapers/patch/fall-of-the-lich-king/fall-of-the-lich-king-1920x1080.jpg",
@@ -14,9 +13,7 @@ const urlList = [
     "http://content.battlenet.com.cn/wow/media/wallpapers/patch/rage-of-the-firelands/rage-of-the-firelands-1920x1200.jpg",
     "http://content.battlenet.com.cn/wow/media/wallpapers/patch/fury-of-hellfire/fury-of-hellfire-3840x2160.jpg",
 ];
-
-const cookie = ''
-let total_page = 1;
+const cookie = 'BAIDUID=5C12C7AEF8BE9577EEE7C40A5E75B5CE:FG=1; PSTM=1511497300; BIDUPSID=1C989DFC6AE5B0296F678A5966ED8303; MCITY=-131%3A; BDORZ=B490B5EBF6F3CD402E515D22BCDA1598; locale=zh; FP_UID=d0d74edf611b7489b777b2ae0cb6a8fd; TIEBAUID=097ce01ce0b5f1f8d47f32c4; TIEBA_USERTYPE=4fe0d47fe88578b8153531eb; bdshare_firstime=1513732966474; Hm_lvt_98b9d8c2fd6608d564bf2ac2ae642948=1512350969,1513592519,1513685300,1513732967; H_PS_PSSID=25245_1424_21089_17001_25441_25438_25177_20928; BDUSS=C1GTDNwc3VLNG01YXZLTlJiMXltdGxoS1A1LWt0N35RZWxSYU9uR2ZOeExaMkZhQUFBQUFBJCQAAAAAAAAAAAEAAABQF0sb0v3LvM~gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEvaOVpL2jlaO'
 
 const get_page_url = (num) => {
     let arr = [];
@@ -30,15 +27,15 @@ const get_page_url = (num) => {
 const get_item_url_arr = (page_arr) => {
     async.mapLimit(page_arr, 1, (url, callback) => {
         $http.get(url).then(res => {
-            
             const $ = cheerio.load(res.text);
             let a_arr = [];
+
             $('.lzl_content_main').each(function (index, ele) {
                 a_arr.push($(this).find('a').text());
             })
+
             callback(null, a_arr);
         })
-
     }, (err, res) => {
         if(err) throw err
 
@@ -55,19 +52,14 @@ $http.get('https://tieba.baidu.com/p/comment?tid=5171602458&pid=108295392615&pn=
     .set('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36')
     .then(res => {
         if(res.status != 200) throw res.status
-        let a_arr = [];
- 
-        const $ = cheerio.load(res.text);
-        
-        total_page = Number($('.pager_theme_2').children().last().attr('href').substring(1))
 
-        const page_url_arr = get_page_url(total_page);
+        let a_arr = [];
+        const $ = cheerio.load(res.text);
+        const page_url_arr = get_page_url(Number($('.pager_theme_2').children().last().attr('href').substring(1)) || 1);
 
         get_item_url_arr(page_url_arr);
 
-    }).catch(err => {
-        console.log(err)
-    })
+    }).catch(err => console.log(err))
 
 
 // request('http://imgsrc.baidu.com/forum/pic/item/60789b2ad40735fa61d9010195510fb30f24083a.jpg').pipe(fs.createWriteStream(path.join(__dirname, '/naa.jpg')))

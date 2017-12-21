@@ -3,7 +3,7 @@ const path = require('path')
 const $http = require('superagent');
 const cheerio = require('cheerio');
 const async = require('async');
-var request = require("request");
+const request = require("request");
 
 const num = parseInt(process.argv[2])
 
@@ -11,21 +11,17 @@ if(!num) {
     throw 'you should input  node page.js ${num}'
 }
 
-console.log(num)
 fs.readFile(path.join(__dirname, './res_file/item_url_arr.json'), 'utf-8', (err, data) => {
     if(err) throw err;
-    const item_arr = JSON.parse(data)[(parseInt(num) - 1)];
-    // console.log(item_arr);
-    async.mapLimit(item_arr, 1, (url, callback) => {
 
-        // console.log('req:' + url )
-        
+    const item_arr = JSON.parse(data)[(parseInt(num) - 1)];
+
+    async.mapLimit(item_arr, 1, (url, callback) => {  
         $http.get(url)
         .set('Host', 'tieba.baidu.com')
         .set('User-Agent', 'Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Mobile Safari/537.36')
         .then(res => {
             // console.log('res:' + url) 
-
             const $ = cheerio.load(res.text);
             let img_arr = [];
             const title = $('title').text();
@@ -41,10 +37,7 @@ fs.readFile(path.join(__dirname, './res_file/item_url_arr.json'), 'utf-8', (err,
                 fs.mkdirSync(dir_name);
             }
 
-            const information = {
-                title,
-                img_arr
-            }
+            const information = { title, img_arr }
 
             fs.writeFile(path.join(dir_name, '/information.json'), JSON.stringify(information), 'utf-8', err => {
                 if (err) throw err;
@@ -55,6 +48,7 @@ fs.readFile(path.join(__dirname, './res_file/item_url_arr.json'), 'utf-8', (err,
             async.mapLimit(img_arr, 3, (url, callback) => {
                 const img_type = url.substring(url.lastIndexOf('.'));
                 const name = img_arr.indexOf(url);
+
                 request({
                     url: url
                 })
@@ -62,19 +56,12 @@ fs.readFile(path.join(__dirname, './res_file/item_url_arr.json'), 'utf-8', (err,
                 .pipe(fs.createWriteStream(path.join(dir_name, name + img_type)))
                 
                 callback(null);
-            }, (err, res) => {
-                console.log('img '+ title +'over')
-            })
 
-        }).catch(err => {
-            console.log('$http err : ' + err)
-        })        
+            }, (err, res) => console.log('img '+ title +'over'))
 
-    }, (err, res) => {
+        }).catch(err =>  console.log('$http err : ' + err))        
 
-        
-        console.log('write all over')
-    })
+    }, (err, res) => console.log('write all over'))
 })
 
 
