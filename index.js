@@ -46,20 +46,20 @@ const get_item_url_arr = (page_arr) => {
     })
 }
 
-$http.get('https://tieba.baidu.com/p/comment?tid=5171602458&pid=108295392615&pn=1&t=1513685817724&red_tag=1472410715')
-    .set('cookie', cookie)
-    .set('Host', 'tieba.baidu.com')
-    .set('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36')
-    .then(res => {
-        if(res.status != 200) throw res.status
+// $http.get('https://tieba.baidu.com/p/comment?tid=5171602458&pid=108295392615&pn=1&t=1513685817724&red_tag=1472410715')
+//     .set('cookie', cookie)
+//     .set('Host', 'tieba.baidu.com')
+//     .set('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36')
+//     .then(res => {
+//         if(res.status != 200) throw res.status
 
-        let a_arr = [];
-        const $ = cheerio.load(res.text);
-        const page_url_arr = get_page_url(Number($('.pager_theme_2').children().last().attr('href').substring(1)) || 1);
+//         let a_arr = [];
+//         const $ = cheerio.load(res.text);
+//         const page_url_arr = get_page_url(Number($('.pager_theme_2').children().last().attr('href').substring(1)) || 1);
 
-        get_item_url_arr(page_url_arr);
+//         get_item_url_arr(page_url_arr);
 
-    }).catch(err => console.log(err))
+//     }).catch(err => console.log(err))
 
 
 // request('http://imgsrc.baidu.com/forum/pic/item/60789b2ad40735fa61d9010195510fb30f24083a.jpg').pipe(fs.createWriteStream(path.join(__dirname, '/naa.jpg')))
@@ -97,7 +97,55 @@ $http.get('https://tieba.baidu.com/p/comment?tid=5171602458&pid=108295392615&pn=
 // })
 
 
+$http.get('https://tieba.baidu.com/p/3760062290')
+.set('Host', 'tieba.baidu.com')
+.set('User-Agent', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.104 Safari/537.36 Core/1.53.3427.400 QQBrowser/9.6.12513.400')
+.then(res => {
+    // console.log('res:' + url) 
+    const $ = cheerio.load(res.text);
+    let img_arr = [];
+    const title = $('title').text();
+    const dir_name = path.join(__dirname, '../res_file/', title);
 
+    fs.writeFile(path.join(__dirname, './information.html'), JSON.stringify(res.text), 'utf-8', err => {
+        if (err) throw err;
+        // console.log('write '+ dir_name +' over')
+       
+    })
+
+    // $('.j_media_thumb_holder.img_placeholder').each(function() {
+    //     let little_url = $(this).attr('data-url');
+    //     const url = decodeURIComponent(little_url.substring(little_url.indexOf('src=http') + 4));
+    //     img_arr.push(url);
+    // })
+
+    // if (!fs.existsSync(dir_name)) {
+    //     fs.mkdirSync(dir_name);
+    // }
+
+    // const information = { title, img_arr }
+
+    // fs.writeFile(path.join(dir_name, '/information.json'), JSON.stringify(information), 'utf-8', err => {
+    //     if (err) throw err;
+    //     // console.log('write '+ dir_name +' over')
+    //     callback(null, {dir_name, img_arr})
+    // })
+
+    // async.mapLimit(img_arr, 3, (url, callback) => {
+    //     const img_type = url.substring(url.lastIndexOf('.'));
+    //     const name = img_arr.indexOf(url);
+
+    //     request({
+    //         url: url
+    //     })
+    //     .on('error', err => console.log(err))
+    //     .pipe(fs.createWriteStream(path.join(dir_name, name + img_type)))
+        
+    //     callback(null);
+
+    // }, (err, res) => console.log('img '+ title +'over'))
+
+}).catch(err =>  console.log('$http err : ' + err))
 
 
 
