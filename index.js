@@ -13,7 +13,7 @@ const urlList = [
     "http://content.battlenet.com.cn/wow/media/wallpapers/patch/rage-of-the-firelands/rage-of-the-firelands-1920x1200.jpg",
     "http://content.battlenet.com.cn/wow/media/wallpapers/patch/fury-of-hellfire/fury-of-hellfire-3840x2160.jpg",
 ];
-const cookie = ''
+const cookie = ''//cookie没了 
 
 const get_page_url = (num) => {
     let arr = [];
