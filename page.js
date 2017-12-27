@@ -19,7 +19,7 @@ fs.readFile(path.join(__dirname, './res_file/item_url_arr.json'), 'utf-8', (err,
     async.mapLimit(item_arr, 1, (url, callback) => {  
         $http.get(url)
         .set('Host', 'tieba.baidu.com')
-        .set('User-Agent', 'Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Mobile Safari/537.36')
+        .set('User-Agent', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.104 Safari/537.36 Core/1.53.3427.400 QQBrowser/9.6.12513.400')
         .then(res => {
             // console.log('res:' + url) 
             const $ = cheerio.load(res.text);
@@ -27,10 +27,13 @@ fs.readFile(path.join(__dirname, './res_file/item_url_arr.json'), 'utf-8', (err,
             const title = $('title').text();
             const dir_name = path.join(__dirname, '../res_file/', title);
 
-            $('.j_media_thumb_holder.img_placeholder').each(function() {
-                let little_url = $(this).attr('data-url');
-                const url = decodeURIComponent(little_url.substring(little_url.indexOf('src=http') + 4));
-                img_arr.push(url);
+            $('.BDE_Image').each(function() {
+                let little_url = $(this).attr('src');
+                if(~little_url.indexOf('sign=')) {
+                    const num = little_url.lastIndexOf('/');
+                    const url = `https://imgsa.baidu.com/forum/pic/item${little_url.substring(num)}`;//decodeURIComponent(little_url.substring(little_url.indexOf('src=http') + 4));
+                    img_arr.push(url);
+                }
             })
 
             if (!fs.existsSync(dir_name)) {
