@@ -1,3 +1,6 @@
+/**
+ * 获取总目录 存到 item_url_arr.json 文件中，文件中的格式是每一页包含几个目录
+ */
 const http = require('http');
 const fs = require('fs');
 const path = require('path');

@@ -1,3 +1,7 @@
+/**
+ * node page.js ${page_num}
+ * 分单元页爬取图片并存储
+ */
 const fs = require('fs');
 const path = require('path')
 const $http = require('superagent');
@@ -9,6 +13,11 @@ const num = parseInt(process.argv[2])
 
 if(!num) {
     throw 'you should input  node page.js ${num}'
+}
+
+const res_dir = path.join(__dirname, '../res_file');
+if(!fs.existsSync(res_dir)) {
+    fs.mkdirSync(res_dir)
 }
 
 fs.readFile(path.join(__dirname, './res_file/item_url_arr.json'), 'utf-8', (err, data) => {
